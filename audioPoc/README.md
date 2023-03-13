@@ -30,7 +30,7 @@
   g++ -o test test.cpp -lopus
 ```
 
-# How to install opus on linux
+# How to install Portaudio on linux
 
  1 - Go to the portaudio website at http://files.portaudio.com/docs/v19-doxydocs/index.html and click on the "Downloads" link at the top of the page.
 
