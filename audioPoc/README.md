@@ -29,4 +29,35 @@
 ```bash
   g++ -o test test.cpp -lopus
 ```
+
+# How to install opus on linux
+
+ 1 - Go to the portaudio website at http://files.portaudio.com/docs/v19-doxydocs/index.html and click on the "Downloads" link at the top of the page.
+
+
+ 3 - extract files using : 
+
+```bash
+     tar -xvzf /path/to/filename.tar.gz 
+```
+ 4 - Navigate to the extracted directory.
+ 
+ 5 - Then, run the following commands : 
+
+ ``` bash
+    ./configure
+    make
+    sudo make install
+```
+
+## Now you are able to Compile opus. 
+
+# How to compil Opus 
+
+## Running...
+
+
+```bash
+  g++ -o test test.cpp -lopus --lportaudio
+```
 It's a first try. The next updates will be better than this...
