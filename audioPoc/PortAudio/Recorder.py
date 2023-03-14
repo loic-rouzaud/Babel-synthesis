@@ -8,5 +8,5 @@ with open(raw_audio_file, 'rb') as f:
     raw_audio = np.frombuffer(f.read(), dtype=np.float32)
 
 # Play the audio back
-sd.play(raw_audio, samplerate=44100)
+sd.play(raw_audio, samplerate=38000)
 sd.wait()
