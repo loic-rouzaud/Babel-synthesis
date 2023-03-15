@@ -8,6 +8,8 @@
 #ifndef GRAPAHICSYSTEM_HPP_
 #define GRAPAHICSYSTEM_HPP_
 
+#include "../Interface/ISystem.hpp"
+
 class GrapahicSystem {
     public:
         GrapahicSystem();

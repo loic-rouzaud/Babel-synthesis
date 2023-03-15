@@ -8,6 +8,9 @@
 #ifndef ANETWORK_HPP_
 #define ANETWORK_HPP_
 
+#include "Interface/INetwork.hpp"
+#include "TcpSocket.hpp"
+
 class ANetwork {
     public:
         ANetwork();
@@ -15,6 +18,10 @@ class ANetwork {
 
     protected:
     private:
+        void sendData();
+        void getData();
+        void CreateNewUser();
+
 };
 
 #endif /* !ANETWORK_HPP_ */

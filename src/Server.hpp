@@ -8,6 +8,8 @@
 #ifndef SERVER_HPP_
 #define SERVER_HPP_
 
+#include "ANetwork.hpp"
+
 class Server {
     public:
         Server();

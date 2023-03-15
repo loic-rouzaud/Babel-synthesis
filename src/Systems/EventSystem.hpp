@@ -8,6 +8,8 @@
 #ifndef EVENTSYSTEM_HPP_
 #define EVENTSYSTEM_HPP_
 
+#include "../Interface/ISystem.hpp"
+
 class EventSystem {
     public:
         EventSystem();
@@ -15,6 +17,8 @@ class EventSystem {
 
     protected:
     private:
+        void hangUp();
+        void hangOut();
 };
 
 #endif /* !EVENTSYSTEM_HPP_ */
