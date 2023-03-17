@@ -8,8 +8,13 @@
 #ifndef ANETWORK_HPP_
 #define ANETWORK_HPP_
 
-#include "Interface/INetwork.hpp"
-#include "TcpSocket.hpp"
+#include "../client/Client.hpp"
+#include "../server/Server.hpp"
+#include <QtWidgets>
+#include <QtCore>
+#include <QDialog>
+#include <QString>
+#include <QList>
 
 class ANetwork {
     public:

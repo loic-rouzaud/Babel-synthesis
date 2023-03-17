@@ -10,8 +10,8 @@
 #ifndef CORE_HPP_
 #define CORE_HPP_
 
-#include "Interface/INetwork.hpp"
-#include "Interface/ISystem.hpp"
+#include "../Interface/INetwork.hpp"
+#include "../Interface/ISystem.hpp"
 
 class Core {
     public:

@@ -6,7 +6,6 @@
 */
 
 #include "Core.hpp"
-#include <iostream>
 #include <QApplication>
 #include <QtWidgets>
 
@@ -21,8 +20,8 @@ Core::~Core()
 int main(int ac, char **av)
 {
     QApplication app(ac, av);
-    GraphicSystem window;
-    window.show();
-
+    QApplication::setApplicationDisplayName(Server::tr("Babel Server"));
+    Server server;
+    server.show();
     return app.exec();
 }

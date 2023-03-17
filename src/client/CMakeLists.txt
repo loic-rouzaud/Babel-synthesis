@@ -13,24 +13,32 @@ set(CMAKE_AUTORCC ON)
 
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}/
-    ${CMAKE_CURRENT_SOURCE_DIR}/Interface
-    ${CMAKE_CURRENT_SOURCE_DIR}/Systems
+    ${CMAKE_CURRENT_SOURCE_DIR}../Interface
+    ${CMAKE_CURRENT_SOURCE_DIR}../Systems
 )
 
 # Add source files to the project
 set(SRC_FILES
     Core.cpp
-    Systems/GraphicSystem.cpp
-    Interface/ISystem.cpp
+    ../Systems/GraphicSystem.cpp
+    ../Interface/ISystem.cpp
+    client.cpp
 )
 
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Network Widgets)
+
 qt_wrap_cpp(MOC_FILES
-    Systems/GraphicSystem.hpp
+    ../Systems/GraphicSystem.hpp
+    Client.hpp
+    ../server/ANetwork.hpp
 )
 
 # Add source files to the project
 add_executable(${PROJECT_NAME} ${SRC_FILES} ${MOC_FILES})
 
-target_link_libraries(Babel PRIVATE Qt6::Widgets)
-
+target_link_libraries(Babel PUBLIC
+    Qt::Core
+    Qt::Gui
+    Qt::Network
+    Qt::Widgets
+)
