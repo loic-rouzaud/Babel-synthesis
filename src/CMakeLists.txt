@@ -7,16 +7,30 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
-# Add source files to the project
-add_executable(${PROJECT_NAME} Core.cpp)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+
+include_directories(
+    ${CMAKE_CURRENT_BINARY_DIR}/
+    ${CMAKE_CURRENT_SOURCE_DIR}/Interface
+    ${CMAKE_CURRENT_SOURCE_DIR}/Systems
+)
 
 # Add source files to the project
-target_sources(${PROJECT_NAME}
-    PRIVATE
+set(SRC_FILES
     Core.cpp
+    Systems/GraphicSystem.cpp
+    Interface/ISystem.cpp
 )
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
+qt_wrap_cpp(MOC_FILES
+    Systems/GraphicSystem.hpp
+)
+
+# Add source files to the project
+add_executable(${PROJECT_NAME} ${SRC_FILES} ${MOC_FILES})
+
 target_link_libraries(Babel PRIVATE Qt6::Widgets)
 
-# Set the C++ standard to use
