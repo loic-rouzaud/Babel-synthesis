@@ -8,7 +8,9 @@
 #ifndef SERVER_HPP_
 #define SERVER_HPP_
 
-#include "ANetwork.hpp"
+#include <QtWidgets>
+#include <QtNetwork>
+#include <QtCore>
 
 QT_BEGIN_NAMESPACE
 class QLabel;
@@ -19,18 +21,18 @@ class Server : public QDialog
 {
     Q_OBJECT
 
-    public:
-        explicit Server(QWidget *parent = nullptr);
+public:
+    explicit Server(QWidget *parent = nullptr);
 
-    private slots:
-        void sendFortune();
+private slots:
+    void sendFortune();
 
-    private:
-        void initServer();
+private:
+    void initServer();
 
-        QLabel *statusLabel = nullptr;
-        QTcpServer *tcpServer = nullptr;
-        QList<QString> fortunes;
+    QLabel *statusLabel = nullptr;
+    QTcpServer *tcpServer = nullptr;
+    QList<QString> fortunes;
 };
 
 #endif /* !SERVER_HPP_ */

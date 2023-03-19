@@ -6,9 +6,7 @@
 */
 
 #include "Server.hpp"
-#include <QtWidgets>
-#include <QtNetwork>
-#include <QtCore>
+#include <iostream>
 
 Server::Server(QWidget *parent)
     : QDialog(parent)
@@ -19,10 +17,11 @@ Server::Server(QWidget *parent)
 
     initServer();
 
+    fortunes << tr("you are connected");
+
     auto quitButton = new QPushButton(tr("Quit"));
     quitButton->setAutoDefault(false);
     connect(quitButton, &QAbstractButton::clicked, this, &QWidget::close);
-
     connect(tcpServer, &QTcpServer::newConnection, this, &Server::sendFortune);
 
     auto buttonLayout = new QHBoxLayout;
@@ -64,7 +63,6 @@ void Server::initServer()
     }
     QString ipAddress;
     QList<QHostAddress> ipAddressesList = QNetworkInterface::allAddresses();
-
     for (int i = 0; i < ipAddressesList.size(); ++i) {
         if (ipAddressesList.at(i) != QHostAddress::LocalHost &&
             ipAddressesList.at(i).toIPv4Address()) {
@@ -72,7 +70,6 @@ void Server::initServer()
             break;
         }
     }
-
     if (ipAddress.isEmpty())
         ipAddress = QHostAddress(QHostAddress::LocalHost).toString();
     statusLabel->setText(tr("The server is running on\n\nIP: %1\nport: %2\n\n"
@@ -89,10 +86,10 @@ void Server::sendFortune()
     out << fortunes[QRandomGenerator::global()->bounded(fortunes.size())];
 
     QTcpSocket *clientConnection = tcpServer->nextPendingConnection();
+    std::cout << "New connection from : " << clientConnection->peerAddress().toString().toStdString() << std::endl;
     connect(clientConnection, &QAbstractSocket::disconnected,
             clientConnection, &QObject::deleteLater);
 
     clientConnection->write(block);
     clientConnection->disconnectFromHost();
 }
-

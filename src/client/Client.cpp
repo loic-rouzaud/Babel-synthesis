@@ -5,9 +5,10 @@
 ** Client
 */
 
-#include "Client.hpp"
 #include <QtWidgets>
 #include <QtNetwork>
+#include "Client.hpp"
+
 
 Client::Client(QWidget *parent)
     : QDialog(parent)
@@ -17,9 +18,7 @@ Client::Client(QWidget *parent)
     , tcpSocket(new QTcpSocket(this))
 {
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
-
     hostCombo->setEditable(true);
-
     QString name = QHostInfo::localHostName();
     if (!name.isEmpty()) {
         hostCombo->addItem(name);
@@ -29,14 +28,11 @@ Client::Client(QWidget *parent)
     }
     if (name != QLatin1String("localhost"))
         hostCombo->addItem(QString("localhost"));
-
     QList<QHostAddress> ipAddressesList = QNetworkInterface::allAddresses();
-
     for (int i = 0; i < ipAddressesList.size(); ++i) {
         if (!ipAddressesList.at(i).isLoopback())
             hostCombo->addItem(ipAddressesList.at(i).toString());
     }
-
     for (int i = 0; i < ipAddressesList.size(); ++i) {
         if (ipAddressesList.at(i).isLoopback())
             hostCombo->addItem(ipAddressesList.at(i).toString());
@@ -70,7 +66,7 @@ Client::Client(QWidget *parent)
             this, &Client::enableGetFortuneButton);
     connect(getFortuneButton, &QAbstractButton::clicked,
             this, &Client::requestNewFortune);
-    connect(quitButton, &QAbstractButton::clicked, this, &QWidget::close);    
+    connect(quitButton, &QAbstractButton::clicked, this, &QWidget::close);
     connect(tcpSocket, &QIODevice::readyRead, this, &Client::readFortune);
     connect(tcpSocket, &QAbstractSocket::errorOccurred,
             this, &Client::displayError);

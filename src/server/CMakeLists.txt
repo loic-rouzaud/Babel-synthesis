@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-# Define project name
-project(Babel)
+project(Server)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -17,10 +16,10 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/Systems
 )
 
-# Add source files to the project
 set(SRC_FILES
     Core.cpp
-    server.cpp
+    Server.cpp
+    TcpSocket.cpp
 )
 
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Network Widgets)
@@ -28,12 +27,12 @@ find_package(Qt6 REQUIRED COMPONENTS Core Gui Network Widgets)
 qt_wrap_cpp(MOC_FILES
     Server.hpp
     ANetwork.hpp
+    TcpSocket.hpp
 )
 
-# Add source files to the project
 add_executable(${PROJECT_NAME} ${SRC_FILES} ${MOC_FILES})
 
-target_link_libraries(Babel PUBLIC
+target_link_libraries(Server PUBLIC
     Qt::Core
     Qt::Gui
     Qt::Network

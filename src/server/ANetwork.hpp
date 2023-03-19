@@ -8,8 +8,6 @@
 #ifndef ANETWORK_HPP_
 #define ANETWORK_HPP_
 
-#include "../client/Client.hpp"
-#include "../server/Server.hpp"
 #include <QtWidgets>
 #include <QtCore>
 #include <QDialog>

@@ -7,11 +7,21 @@
 
 #include "TcpSocket.hpp"
 
-TcpSocket::TcpSocket()
-{
+TcpSocket::TcpSocket(QObject* parent)
+    : QTcpSocket(parent) {
+  connectSignals();
 }
 
-TcpSocket::~TcpSocket()
-{
+void TcpSocket::connectSignals() {
+  connect(this, &TcpSocket::readyRead, this, &TcpSocket::onReadyRead);
+  connect(this, &TcpSocket::errorOccurred, this, &TcpSocket::onError);
 }
 
+void TcpSocket::onReadyRead() {
+  QString data = QString::fromUtf8(readAll().data());
+  emit dataReceived(data);
+}
+
+void TcpSocket::onError(QAbstractSocket::SocketError error) {
+  qWarning() << "Socket error: " << error;
+}

@@ -10,8 +10,12 @@
 #ifndef CORE_HPP_
 #define CORE_HPP_
 
-#include "../Interface/INetwork.hpp"
-#include "../Interface/ISystem.hpp"
+#include <QApplication>
+#include <QtWidgets>
+// #include "../Interface/INetwork.hpp"
+// #include "../Interface/ISystem.hpp"
+
+#include "Server.hpp"
 
 class Core {
     public:

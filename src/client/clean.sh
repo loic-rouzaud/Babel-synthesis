@@ -1,1 +1,1 @@
-rm -rf CMakeCache.txt cmake_install.cmake CMakeFiles Babel Makefile Systems/moc_* moc_* Babel_autogen .qt __
+rm -rf CMakeCache.txt cmake_install.cmake CMakeFiles Client Makefile Systems/moc_* moc_* Client_autogen .qt __

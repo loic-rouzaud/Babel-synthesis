@@ -12,6 +12,7 @@
 
 #include "../Interface/INetwork.hpp"
 #include "../Interface/ISystem.hpp"
+#include "Client.hpp"
 
 class Core {
     public:

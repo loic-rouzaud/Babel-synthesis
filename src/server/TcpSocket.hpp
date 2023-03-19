@@ -8,17 +8,23 @@
 #ifndef TCPSOCKET_HPP_
 #define TCPSOCKET_HPP_
 
-// #include <QTcpSocket>
+#include <QTcpSocket>
 
-class TcpSocket {
+class TcpSocket : public QTcpSocket {
+  Q_OBJECT
+
     public:
-        TcpSocket();
-        ~TcpSocket();
-        // QTcpSocket(QObject *parent = nullptr);
-        // virtual	~QTcpSocket();
+        TcpSocket(QObject* parent = nullptr);
 
-    protected:
+    signals:
+        void dataReceived(const QString& data);
+
+    private slots:
+        void onReadyRead();
+        void onError(QAbstractSocket::SocketError error);
+
     private:
+        void connectSignals();
 };
 
 #endif /* !TCPSOCKET_HPP_ */

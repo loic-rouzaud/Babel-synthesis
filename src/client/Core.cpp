@@ -5,10 +5,8 @@
 ** Core
 */
 
-#include "Core.hpp"
-#include <iostream>
 #include <QApplication>
-#include <QtWidgets>
+#include "Core.hpp"
 
 Core::Core()
 {
@@ -18,11 +16,11 @@ Core::~Core()
 {
 }
 
-int main(int ac, char **av)
+int main(int ac, char *av[])
 {
     QApplication app(ac, av);
-    Client client;
     QApplication::setApplicationDisplayName(Client::tr("Fortune Client"));
+    Client client;
     client.show();
     return app.exec();
 }

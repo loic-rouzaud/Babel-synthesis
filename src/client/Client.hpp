@@ -24,24 +24,25 @@ class Client : public QDialog
 {
     Q_OBJECT
 
-    public:
-        explicit Client(QWidget *parent = nullptr);
+public:
+    explicit Client(QWidget *parent = nullptr);
 
-    private slots:
-        void requestNewFortune();
-        void readFortune();
-        void displayError(QAbstractSocket::SocketError socketError);
-        void enableGetFortuneButton();
+private slots:
+    void requestNewFortune();
+    void readFortune();
+    void displayError(QAbstractSocket::SocketError socketError);
+    void enableGetFortuneButton();
 
-    private:
-        QComboBox *hostCombo = nullptr;
-        QLineEdit *portLineEdit = nullptr;
-        QLabel *statusLabel = nullptr;
-        QPushButton *getFortuneButton = nullptr;
+private:
+    QComboBox *hostCombo = nullptr;
+    QLineEdit *portLineEdit = nullptr;
+    QLabel *statusLabel = nullptr;
+    QPushButton *getFortuneButton = nullptr;
 
-        QTcpSocket *tcpSocket = nullptr;
-        QDataStream in;
-        QString currentFortune;
+    QTcpSocket *tcpSocket = nullptr;
+    QDataStream in;
+    QString currentFortune;
 };
+
 
 #endif /* !CLIENT_HPP_ */
