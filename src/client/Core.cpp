@@ -18,11 +18,13 @@ Core::~Core()
 
 int main(int ac, char *av[])
 {
-    QApplication app(ac, av);
-    QApplication::setApplicationDisplayName(Client::tr("Fortune Client"));
+    QCoreApplication a(ac, av);
+
     Client client;
-    GraphicSystem *graphics = new GraphicSystem();
-    graphics->show();
-    client.show();
-    return app.exec();
+    client.connectToServer("localhost", 1234);
+    client.sendMessage("Hello, server!");
+    QObject::connect(&client, &Client::messageReceived, [](QString message){
+        qDebug() << "Received message from server: " << message;
+    });
+    return a.exec();
 }

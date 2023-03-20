@@ -6,6 +6,7 @@
 */
 
 #include "Core.hpp"
+#include "QApplication"
 
 Core::Core()
 {
@@ -15,11 +16,12 @@ Core::~Core()
 {
 }
 
-int main(int ac, char *av[])
+int main(int ac, char **av)
 {
-    QApplication app(ac, av);
-    QApplication::setApplicationDisplayName(Server::tr("Fortune Server"));
+    QCoreApplication a(ac, av);
     Server server;
-    server.show();
-    return app.exec();
+    QObject::connect(&server, &Server::newConnection, [](){
+        qDebug() << "New client connected";
+    });
+    return a.exec();
 }

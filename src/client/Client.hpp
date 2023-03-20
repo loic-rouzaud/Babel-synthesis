@@ -10,37 +10,35 @@
 
 #include "../server/ANetwork.hpp"
 
+#include <QObject>
+#include <QTcpSocket>
+#include <iostream>
+#include <string>
 
-QT_BEGIN_NAMESPACE
-class QComboBox;
-class QLabel;
-class QLineEdit;
-class QPushButton;
-class QTcpSocket;
-QT_END_NAMESPACE
-
-class Client : public QDialog
+class Client : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit Client(QWidget *parent = nullptr);
+    explicit Client(QObject *parent = nullptr);
+    ~Client();
+
+    void connectToServer(QString host, int port);
+    void sendMessage(QByteArray message);
+    void disconnectFromServer();
+
+signals:
+    void messageReceived(QString message);
+    void error(QAbstractSocket::SocketError socketError);
 
 private slots:
-    void requestNewFortune();
-    void readFortune();
+    void readyRead();
+    void connected();
+    void disconnected();
     void displayError(QAbstractSocket::SocketError socketError);
-    void enableGetFortuneButton();
 
 private:
-    QComboBox *hostCombo = nullptr;
-    QLineEdit *portLineEdit = nullptr;
-    QLabel *statusLabel = nullptr;
-    QPushButton *getFortuneButton = nullptr;
-
-    QTcpSocket *tcpSocket = nullptr;
-    QDataStream in;
-    QString currentFortune;
+    QTcpSocket *m_socket;
 };
 
 
