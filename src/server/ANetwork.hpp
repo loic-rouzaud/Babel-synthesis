@@ -13,6 +13,12 @@
 #include <QDialog>
 #include <QString>
 #include <QList>
+#include <QtNetwork>
+#include <QDataStream>
+#include <QTcpSocket>
+
+#include "../client/Client.hpp"
+#include "Server.hpp"
 
 class ANetwork {
     public:

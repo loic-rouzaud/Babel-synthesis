@@ -5,6 +5,9 @@
 ** Server
 */
 
+#include <QtWidgets>
+#include <QtNetwork>
+#include <QtCore>
 #include "Server.hpp"
 #include <iostream>
 

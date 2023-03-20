@@ -11,11 +11,9 @@
 #define CORE_HPP_
 
 #include <QApplication>
-#include <QtWidgets>
-// #include "../Interface/INetwork.hpp"
-// #include "../Interface/ISystem.hpp"
+#include "../Interface/INetwork.hpp"
+#include "../Interface/ISystem.hpp"
 
-#include "Server.hpp"
 
 class Core {
     public:

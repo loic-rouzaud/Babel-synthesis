@@ -8,9 +8,9 @@
 #ifndef SERVER_HPP_
 #define SERVER_HPP_
 
-#include <QtWidgets>
-#include <QtNetwork>
-#include <QtCore>
+#include <QDialog>
+#include <QString>
+#include <QList>
 
 QT_BEGIN_NAMESPACE
 class QLabel;

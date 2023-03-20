@@ -9,22 +9,29 @@
 #define TCPSOCKET_HPP_
 
 #include <QTcpSocket>
+#include <QObject>
+#include <QAbstractSocket>
+#include <QDebug>
 
-class TcpSocket : public QTcpSocket {
-  Q_OBJECT
+class MyTcpSocket : public QObject
+{
+    Q_OBJECT
+public:
+    explicit MyTcpSocket(QObject *parent = 0);
+    
+    void doConnect();
 
-    public:
-        TcpSocket(QObject* parent = nullptr);
-
-    signals:
-        void dataReceived(const QString& data);
-
-    private slots:
-        void onReadyRead();
-        void onError(QAbstractSocket::SocketError error);
+        signals:
+    
+    public slots:
+        void connected();
+        void disconnected();
+        void bytesWritten(qint64 bytes);
+        void readyRead();
 
     private:
-        void connectSignals();
+        QTcpSocket *socket;
+    
 };
 
 #endif /* !TCPSOCKET_HPP_ */

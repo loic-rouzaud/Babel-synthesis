@@ -21,6 +21,8 @@ int main(int ac, char *av[])
     QApplication app(ac, av);
     QApplication::setApplicationDisplayName(Client::tr("Fortune Client"));
     Client client;
+    GraphicSystem *graphics = new GraphicSystem();
+    graphics->show();
     client.show();
     return app.exec();
 }

@@ -9,23 +9,31 @@
 #define GRAPAHICSYSTEM_HPP_
 
 #include <QWidget>
+#include <QStringListModel>
+#include <QListView>
+#include <QLineEdit>
+#include <QtWidgets>
 
-QT_BEGIN_NAMESPACE
-class QLabel;
-class QLineEdit;
-class QTextEdit;
-QT_END_NAMESPACE
-
-class GraphicSystem : public QWidget {
+class GraphicSystem : public QWidget
+{
     Q_OBJECT
 
     public:
         GraphicSystem(QWidget *parent = nullptr);
-        ~GraphicSystem();
+
+    private slots:
+        void filterList(const QString &text);
 
     private:
-        QLineEdit *nameLine;
-        QTextEdit *addressText;
+        QStringListModel *m_model;
+        QListView *m_listView;
+        QLineEdit *m_searchEdit;
+        QLineEdit *m_portEdit;
+        QLineEdit *m_ipEdit;
+        QPushButton *getFortuneButton = nullptr;
+        QLineEdit *portLineEdit = nullptr;
+
+
 };
 
 #endif /* !GRAPAHICSYSTEM_HPP_ */

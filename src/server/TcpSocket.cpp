@@ -7,21 +7,48 @@
 
 #include "TcpSocket.hpp"
 
-TcpSocket::TcpSocket(QObject* parent)
-    : QTcpSocket(parent) {
-  connectSignals();
+MyTcpSocket::MyTcpSocket(QObject *parent) : QObject(parent)
+{
 }
 
-void TcpSocket::connectSignals() {
-  connect(this, &TcpSocket::readyRead, this, &TcpSocket::onReadyRead);
-  connect(this, &TcpSocket::errorOccurred, this, &TcpSocket::onError);
+void MyTcpSocket::doConnect()
+{
+    socket = new QTcpSocket(this);
+
+    connect(socket, SIGNAL(connected()),this, SLOT(connected()));
+    connect(socket, SIGNAL(disconnected()),this, SLOT(disconnected()));
+    connect(socket, SIGNAL(bytesWritten(qint64)),this, SLOT(bytesWritten(qint64)));
+    connect(socket, SIGNAL(readyRead()),this, SLOT(readyRead()));
+
+    qDebug() << "connecting...";
+
+    socket->connectToHost("google.com", 80);
+
+    if(!socket->waitForConnected(5000)) {
+        qDebug() << "Error: " << socket->errorString();
+    }
 }
 
-void TcpSocket::onReadyRead() {
-  QString data = QString::fromUtf8(readAll().data());
-  emit dataReceived(data);
+void MyTcpSocket::connected()
+{
+    qDebug() << "connected...";
+
+    socket->write("test");
 }
 
-void TcpSocket::onError(QAbstractSocket::SocketError error) {
-  qWarning() << "Socket error: " << error;
+void MyTcpSocket::disconnected()
+{
+    qDebug() << "disconnected...";
+}
+
+void MyTcpSocket::bytesWritten(qint64 bytes)
+{
+    qDebug() << bytes << " bytes written...";
+}
+
+void MyTcpSocket::readyRead()
+{
+    qDebug() << "reading...";
+
+    qDebug() << socket->readAll();
 }

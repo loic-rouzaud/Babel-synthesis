@@ -19,6 +19,7 @@ include_directories(
 set(SRC_FILES
     Core.cpp
     Client.cpp
+    ../Systems/GraphicSystem.cpp
     # TcpSocket.cpp
 )
 
@@ -28,6 +29,7 @@ qt_wrap_cpp(MOC_FILES
     # ../Systems/GraphicSystem.hpp
     Core.hpp
     Client.hpp
+    ../Systems/GraphicSystem.hpp
     # ../server/ANetwork.hpp
     # TcpSocket.hpp
 )

@@ -8,9 +8,8 @@
 #ifndef CLIENT_HPP_
 #define CLIENT_HPP_
 
-#include <QDataStream>
-#include <QDialog>
-#include <QTcpSocket>
+#include "../server/ANetwork.hpp"
+
 
 QT_BEGIN_NAMESPACE
 class QComboBox;

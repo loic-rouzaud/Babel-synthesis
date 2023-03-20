@@ -7,6 +7,7 @@
 
 #include "INetwork.hpp"
 
+
 INetwork::INetwork()
 {
 }
