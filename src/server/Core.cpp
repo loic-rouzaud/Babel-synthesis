@@ -10,7 +10,7 @@
 Core::Core(int ac, char **av) : QApplication(ac, av)
 {
     _server = new Server();
-
+    // QObject::connect(tcpServer, SIGNAL(newConnection), this, SLOT(handleNewConnection));
 }
 
 Core::~Core()

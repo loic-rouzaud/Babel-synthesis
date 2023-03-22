@@ -30,43 +30,27 @@ Server::Server(QWidget *parent) : QWidget(parent)
     if (ipAddress.isEmpty()) {
         ipAddress = QHostAddress(QHostAddress::LocalHost).toString();
     }
-    std::cout << "Server is running on " << ipAddress.toStdString() << ":" << m_server->serverPort() << std::endl;
+    std::cout << "Server is running on " << ipAddress.toStdString() << std::endl;
+    std::cout << "Port: " << m_server->serverPort() << std::endl;
+    connect(m_server, &QTcpServer::newConnection, this, &Server::handleNewConnection);
 }
-
-
 
 void Server::handleNewConnection()
 {
+    std::cout << "coucou" << std::endl;
     QTcpSocket *client = m_server->nextPendingConnection();
-    // m_status = true;
-    connect(client, &QTcpSocket::readyRead, this, &Server::handleReadyRead);
     connect(client, &QTcpSocket::disconnected, this, &Server::handleDisconnected);
 
     m_clients.append(client);
-    emit newConnection();
-}
-
-void Server::handleReadyRead()
-{
-    QTcpSocket *client = static_cast<QTcpSocket*>(sender());
-
-    while (client->bytesAvailable() > 0) {
-        QByteArray data = client->readAll();
-
-        client->write("Message received!");
-    }
+    std::cout << "New client connected" << std::endl;
+    std::cout << "Number of clients: " << m_clients.size() << std::endl;
+    // emit newConnection();
 }
 
 void Server::handleDisconnected()
 {
     QTcpSocket *client = static_cast<QTcpSocket*>(sender());
-    // m_status = false;
     m_clients.removeOne(client);
     client->deleteLater();
+    std::cout << "Client disconnected" << std::endl;
 }
-
-// void readSocketData() {
-//     while(QAbstractSocket::m_pTcpSocket->bytesAvailable()) {
-//         QByteArray receivedData = m_pTcpSocket->readAll();     
-//     }
-// }

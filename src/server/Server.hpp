@@ -30,7 +30,7 @@ signals:
 
 private slots:
     void handleNewConnection();
-    void handleReadyRead();
+    // void handleResadyRead();
     void handleDisconnected();
 
 private:

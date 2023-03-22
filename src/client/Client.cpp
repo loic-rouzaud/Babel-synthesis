@@ -35,6 +35,7 @@ void Client::onSendMessage(QString message)
     stream << message.length();
     data.append(message.toUtf8());
 
+    std::cout << "Sending message: " << message.toStdString() << std::endl;
     m_socket->write(data, data.length());
 }
 

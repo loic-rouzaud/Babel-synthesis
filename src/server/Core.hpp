@@ -16,6 +16,9 @@
 
 
 class Core : public QApplication {
+    
+    Q_OBJECT
+
     public:
         Core(int ac, char **av);
         ~Core();
