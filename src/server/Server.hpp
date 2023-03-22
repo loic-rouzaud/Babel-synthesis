@@ -11,13 +11,19 @@
 #include <QObject>
 #include <QTcpServer>
 #include <QTcpSocket>
+#include <QList>
+#include <QHostAddress>
+#include <QMessageBox>
+#include <Qwidget>
+#include <QString>
+#include <QNetworkInterface>
 
-class Server : public QObject
+class Server : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit Server(QObject *parent = nullptr);
+    explicit Server(QWidget *parent = nullptr);
 
 signals:
     void newConnection();
@@ -28,8 +34,9 @@ private slots:
     void handleDisconnected();
 
 private:
-    QTcpServer *m_server;
+    QTcpServer *m_server = nullptr;
     QList<QTcpSocket*> m_clients;
+    bool m_status = false;
 };
 
 #endif /* !SERVER_HPP_ */

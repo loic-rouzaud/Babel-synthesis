@@ -6,10 +6,11 @@
 */
 
 #include "Core.hpp"
-#include "QApplication"
 
-Core::Core()
+Core::Core(int ac, char **av) : QApplication(ac, av)
 {
+    _server = new Server();
+
 }
 
 Core::~Core()
@@ -18,10 +19,6 @@ Core::~Core()
 
 int main(int ac, char **av)
 {
-    QCoreApplication a(ac, av);
-    Server server;
-    QObject::connect(&server, &Server::newConnection, [](){
-        qDebug() << "New client connected";
-    });
-    return a.exec();
+    Core core(ac, av);
+    return core.exec();
 }

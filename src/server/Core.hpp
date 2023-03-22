@@ -11,17 +11,18 @@
 #define CORE_HPP_
 
 #include <QApplication>
-#include "../Interface/INetwork.hpp"
-#include "../Interface/ISystem.hpp"
+#include "INetwork.hpp"
+#include "ISystem.hpp"
 
 
-class Core {
+class Core : public QApplication {
     public:
-        Core();
+        Core(int ac, char **av);
         ~Core();
 
     protected:
     private:
+        Server *_server;
 };
 
 #endif /* !CORE_HPP_ */

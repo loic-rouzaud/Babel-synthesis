@@ -8,12 +8,14 @@
 #ifndef CLIENT_HPP_
 #define CLIENT_HPP_
 
-#include "../server/ANetwork.hpp"
+// #include "../server/ANetwork.hpp"
 
 #include <QObject>
 #include <QTcpSocket>
+#include <QtWidgets>
+#include <QtNetwork>
+#include <QIODevice>
 #include <iostream>
-#include <string>
 
 class Client : public QObject
 {
@@ -23,18 +25,18 @@ public:
     explicit Client(QObject *parent = nullptr);
     ~Client();
 
-    void connectToServer(QString host, int port);
-    void sendMessage(QByteArray message);
     void disconnectFromServer();
 
 signals:
     void messageReceived(QString message);
     void error(QAbstractSocket::SocketError socketError);
 
-private slots:
+public slots:
     void readyRead();
     void connected();
     void disconnected();
+    void onSendMessage(QString message);
+    void connectToServer(QString host, quint16 port);
     void displayError(QAbstractSocket::SocketError socketError);
 
 private:

@@ -8,26 +8,41 @@
 #include "Server.hpp"
 #include <iostream>
 
-Server::Server(QObject *parent) : QObject(parent)
+Server::Server(QWidget *parent) : QWidget(parent)
 {
     m_server = new QTcpServer(this);
-
-    connect(m_server, &QTcpServer::newConnection, this, &Server::handleNewConnection);
-
-    if (!m_server->listen(QHostAddress::Any, 1234)) {
-        qWarning() << "Failed to listen on port 1234";
+    if (!m_server->listen()) {
+        QMessageBox::critical(this, tr("Server"), tr("Unable to start the server: %1.").arg(m_server->errorString()));
+        close();
+        return;
     }
+    QString ipAddress;
+    QList<QHostAddress> ipAddressesList = QNetworkInterface::allAddresses();
+
+    for (int i = 0; i < ipAddressesList.size(); ++i) {
+        if (ipAddressesList.at(i) != QHostAddress::LocalHost &&
+            ipAddressesList.at(i).toIPv4Address()) {
+            ipAddress = ipAddressesList.at(i).toString();
+            break;
+        }
+    }
+
+    if (ipAddress.isEmpty()) {
+        ipAddress = QHostAddress(QHostAddress::LocalHost).toString();
+    }
+    std::cout << "Server is running on " << ipAddress.toStdString() << ":" << m_server->serverPort() << std::endl;
 }
+
+
 
 void Server::handleNewConnection()
 {
     QTcpSocket *client = m_server->nextPendingConnection();
+    // m_status = true;
     connect(client, &QTcpSocket::readyRead, this, &Server::handleReadyRead);
     connect(client, &QTcpSocket::disconnected, this, &Server::handleDisconnected);
 
     m_clients.append(client);
-    
-    std::cout << "New connection" << std::endl;
     emit newConnection();
 }
 
@@ -45,6 +60,13 @@ void Server::handleReadyRead()
 void Server::handleDisconnected()
 {
     QTcpSocket *client = static_cast<QTcpSocket*>(sender());
+    // m_status = false;
     m_clients.removeOne(client);
     client->deleteLater();
 }
+
+// void readSocketData() {
+//     while(QAbstractSocket::m_pTcpSocket->bytesAvailable()) {
+//         QByteArray receivedData = m_pTcpSocket->readAll();     
+//     }
+// }

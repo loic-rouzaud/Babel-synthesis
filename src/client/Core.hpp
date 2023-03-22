@@ -10,16 +10,25 @@
 #ifndef CORE_HPP_
 #define CORE_HPP_
 
-#include "../Interface/INetwork.hpp"
-#include "../Interface/ISystem.hpp"
+#include <QApplication>
 
-class Core {
+// #include "INetwork.hpp"
+#include "Client.hpp"
+#include "GraphicSystem.hpp"
+
+class Core : public QApplication {
+    
+    Q_OBJECT
+
     public:
-        Core();
+        Core(int ac, char **av);
         ~Core();
 
     protected:
+
     private:
+        GraphicSystem *_graphicSystem;
+        Client *_network;
 };
 
 #endif /* !CORE_HPP_ */

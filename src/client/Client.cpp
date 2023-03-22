@@ -5,8 +5,6 @@
 ** Client
 */
 
-#include <QtWidgets>
-#include <QtNetwork>
 #include "Client.hpp"
 
 Client::Client(QObject *parent) : QObject(parent)
@@ -16,7 +14,6 @@ Client::Client(QObject *parent) : QObject(parent)
     connect(m_socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
     connect(m_socket, SIGNAL(connected()), this, SLOT(connected()));
     connect(m_socket, SIGNAL(disconnected()), this, SLOT(disconnected()));
-    connect(m_socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(displayError(QAbstractSocket::SocketError)));
 }
 
 Client::~Client()
@@ -25,16 +22,20 @@ Client::~Client()
     delete m_socket;
 }
 
-void Client::connectToServer(QString host, int port)
+void Client::connectToServer(QString host, quint16 port)
 {
     m_socket->connectToHost(host, port);
 }
 
-void Client::sendMessage(QByteArray message)
+void Client::onSendMessage(QString message)
 {
     QByteArray data;
-    data.append(message);
-    m_socket->write(data);
+    QDataStream stream(&data, QIODevice::WriteOnly);
+    stream.setByteOrder(QDataStream::LittleEndian);
+    stream << message.length();
+    data.append(message.toUtf8());
+
+    m_socket->write(data, data.length());
 }
 
 void Client::disconnectFromServer()

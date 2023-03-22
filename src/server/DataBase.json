@@ -1,14 +1,26 @@
 {
-    "Contacts1" : [
-        "contact1",
-        "contact2"
+    "IP owner": [
+        {
+            "name": "John Smith",
+            "IP": "127.0.0.1",
+            "connected": true
+        },
+        {
+            "name": "Jane Doe",
+            "IP": "127.0.0.1",
+            "connected": false
+        }
     ],
-    "Contacts2" : [
-        "contact3",
-        "contact4"
-    ],
-    "Contacts3" : [
-        "contact5",
-        "contact6"
-    ]
+    "IP OtherOwner": [
+        {
+            "name": "John Smith",
+            "IP": "127.0.0.1",
+            "connected": true
+        },
+        {
+            "name": "Jane Doe",
+            "IP": "127.0.0.1",
+            "connected": false
+        }
+    ]       
 }
