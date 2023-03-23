@@ -17,11 +17,15 @@ find_package(Qt6 REQUIRED COMPONENTS Core Gui Network Widgets)
 set(SRC_FILES
     Core.cpp
     Server.cpp
+    JsonManager.cpp
+    TcpSocket.cpp
 )
 
 qt_wrap_cpp(MOC_FILES
     Core.hpp
     Server.hpp
+    JsonManager.hpp
+    TcpSocket.hpp
 )
 
 add_executable(${PROJECT_NAME} ${SRC_FILES} ${MOC_FILES})

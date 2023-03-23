@@ -1,37 +1,38 @@
-/*
-** EPITECH PROJECT, 2023
-** Babel-synthesis
-** File description:
-** TcpSocket
-*/
+// /*
+// ** EPITECH PROJECT, 2023
+// ** Babel-synthesis
+// ** File description:
+// ** TcpSocket
+// */
 
-#ifndef TCPSOCKET_HPP_
-#define TCPSOCKET_HPP_
+// #ifndef TCPSOCKET_HPP_
+// #define TCPSOCKET_HPP_
 
-#include <QTcpSocket>
-#include <QObject>
-#include <QAbstractSocket>
-#include <QDebug>
+// #include "JsonManager.hpp"
 
-class MyTcpSocket : public QObject
-{
-    Q_OBJECT
-public:
-    explicit MyTcpSocket(QObject *parent = 0);
+// #include <QTcpSocket>
+// #include <QObject>
+// #include <QAbstractSocket>
+// #include <QDebug>
+// #include <QTcpServer>
+// #include <QList>
+// #include <iostream>
+
+// class TcpSocket : public QObject
+// {
+//     Q_OBJECT
+//     public:
+//         explicit TcpSocket(QObject *parent = 0);
     
-    void doConnect();
-
-        signals:
+//     signals:
     
-    public slots:
-        void connected();
-        void disconnected();
-        void bytesWritten(qint64 bytes);
-        void readyRead();
+//     public slots:
+//         void handleNewConnection();
+//         void handleDisconnected();
 
-    private:
-        QTcpSocket *socket;
-    
-};
+//     private:
+//         QTcpServer *m_server = nullptr;
+//         JsonManager *m_jsonManager = nullptr;
+// };
 
-#endif /* !TCPSOCKET_HPP_ */
+// #endif /* !TCPSOCKET_HPP_ */

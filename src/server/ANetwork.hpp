@@ -16,7 +16,6 @@
 #include <QtNetwork>
 #include <QDataStream>
 #include <QTcpSocket>
-
 #include "Server.hpp"
 
 class ANetwork {
@@ -26,9 +25,6 @@ class ANetwork {
 
     protected:
     private:
-        void sendData();
-        void getData();
-        void CreateNewUser();
 
 };
 

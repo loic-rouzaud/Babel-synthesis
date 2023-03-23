@@ -8,6 +8,7 @@
 #ifndef SERVER_HPP_
 #define SERVER_HPP_
 
+#include "JsonManager.hpp"
 #include <QObject>
 #include <QTcpServer>
 #include <QTcpSocket>
@@ -17,10 +18,7 @@
 #include <Qwidget>
 #include <QString>
 #include <QNetworkInterface>
-#include <QJsonObject>
-#include <QJsonDocument>
-#include <QFile>
-#include <QJsonArray>
+#include <iostream>
 
 class Server : public QWidget
 {
@@ -28,20 +26,20 @@ class Server : public QWidget
 
     public:
         explicit Server(QWidget *parent = nullptr);
-        void jsonManager(QString clientAddress);
+        void createUser(QString clientAddress);
         void changeStatus(QString clientAddress);
 
     signals:
         void newConnection();
 
-    private slots:
+    public slots:
         void handleNewConnection();
         void handleDisconnected();
 
     private:
         QTcpServer *m_server = nullptr;
         QList<QTcpSocket*> m_clients;
-        bool m_status = false;
+        JsonManager *m_jsonManager = nullptr;
 };
 
 #endif /* !SERVER_HPP_ */
