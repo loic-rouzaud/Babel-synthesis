@@ -33,7 +33,6 @@ Server::Server(QWidget *parent) : QWidget(parent)
     std::cout << "Server is running on " << ipAddress.toStdString() << std::endl;
     std::cout << "Port: " << m_server->serverPort() << std::endl;
     connect(m_server, &QTcpServer::newConnection, this, &Server::handleNewConnection);
-    // connect(this, Server::youCanWrite(), this, Server::jsonManager());
 }
 
 void Server::handleNewConnection()
@@ -46,6 +45,17 @@ void Server::handleNewConnection()
     std::cout << "New client connected, IP: " << clientAddress.toStdString() << std::endl;
     std::cout << "Number of clients: " << m_clients.size() << std::endl;
     jsonManager(clientAddress);
+}
+
+void Server::handleDisconnected()
+{
+    QTcpSocket *client = static_cast<QTcpSocket*>(sender());
+    QString clientAddress = client->peerAddress().toString();
+    changeStatus(clientAddress);
+    m_clients.removeOne(client);
+    client->deleteLater();
+    std::cout << "Client disconnected" << std::endl;
+    std::cout << "Number of clients connected: " << m_clients.size() << std::endl;
 }
 
 void Server::jsonManager(QString clientAddress)
@@ -72,16 +82,16 @@ void Server::jsonManager(QString clientAddress)
             QJsonObject obj = jsonArrayExisting[i].toObject();
             if (obj["ipAddress" + QString::number(i+1)] == clientAddress) {
                 index = i;
+                if (!obj["isConnected"].toBool()) {
+                    obj["isConnected"] = true;
+                    jsonArrayExisting.replace(i, obj);
+                }
                 break;
             }
         }
 
         QJsonObject jsonObject;
-        if (index >= 0) {
-            jsonObject[QString("ipAddress") + QString::number(index+1)] = clientAddress;
-            jsonObject[QString("isConnected")] = true;
-            jsonArrayExisting[index] = jsonObject;
-        } else {
+        if (index < 0) {
             int count = jsonArrayExisting.size() + 1;
             jsonObject[QString("ipAddress") + QString::number(count)] = clientAddress;
             jsonObject[QString("isConnected")] = true;
@@ -94,11 +104,33 @@ void Server::jsonManager(QString clientAddress)
     jsonFile.close();
 }
 
-void Server::handleDisconnected()
+
+void Server::changeStatus(QString clientAddress)
 {
-    QTcpSocket *client = static_cast<QTcpSocket*>(sender());
-    m_clients.removeOne(client);
-    client->deleteLater();
-    std::cout << "Client disconnected" << std::endl;
-    std::cout << "Number of clients connected: " << m_clients.size() << std::endl;
+    QFile jsonFile("DataBase.json");
+    jsonFile.open(QIODevice::ReadWrite | QIODevice::Text);
+
+    QJsonDocument jsonDoc;
+    if (!jsonFile.isOpen() || jsonFile.size() == 0) {
+        jsonFile.close();
+        return;
+    } else {
+        QByteArray jsonData = jsonFile.readAll();
+        QJsonDocument jsonDocExisting = QJsonDocument::fromJson(jsonData);
+
+        QJsonArray jsonArrayExisting = jsonDocExisting.array();
+        for (int i = 0; i < jsonArrayExisting.size(); i++) {
+            QJsonObject obj = jsonArrayExisting[i].toObject();
+            if (obj["ipAddress" + QString::number(i+1)] == clientAddress) {
+                obj["isConnected"] = false;
+                jsonArrayExisting[i] = obj;
+                break;
+            }
+        }
+        jsonDoc = QJsonDocument(jsonArrayExisting);
+    }
+    jsonFile.resize(0);
+    jsonFile.write(jsonDoc.toJson());
+    jsonFile.close();
 }
+

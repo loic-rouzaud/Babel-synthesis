@@ -5,6 +5,6 @@
     },
     {
         "ipAddress2": "::ffff:10.15.173.246",
-        "isConnected": true
+        "isConnected": false
     }
 ]

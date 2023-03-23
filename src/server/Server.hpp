@@ -28,6 +28,8 @@ class Server : public QWidget
 
     public:
         explicit Server(QWidget *parent = nullptr);
+        void jsonManager(QString clientAddress);
+        void changeStatus(QString clientAddress);
 
     signals:
         void newConnection();
@@ -35,7 +37,6 @@ class Server : public QWidget
     private slots:
         void handleNewConnection();
         void handleDisconnected();
-        void jsonManager(QString clientAddress);
 
     private:
         QTcpServer *m_server = nullptr;
