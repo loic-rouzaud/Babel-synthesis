@@ -8,7 +8,7 @@
 #ifndef INETWORK_HPP_
 #define INETWORK_HPP_
 
-#include "../server/ANetwork.hpp"
+#include "ANetwork.hpp"
 
 class INetwork {
     public:

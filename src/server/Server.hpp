@@ -17,26 +17,30 @@
 #include <Qwidget>
 #include <QString>
 #include <QNetworkInterface>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include <QFile>
+#include <QJsonArray>
 
 class Server : public QWidget
 {
     Q_OBJECT
 
-public:
-    explicit Server(QWidget *parent = nullptr);
+    public:
+        explicit Server(QWidget *parent = nullptr);
 
-signals:
-    void newConnection();
+    signals:
+        void newConnection();
 
-private slots:
-    void handleNewConnection();
-    // void handleResadyRead();
-    void handleDisconnected();
+    private slots:
+        void handleNewConnection();
+        void handleDisconnected();
+        void jsonManager(QString clientAddress);
 
-private:
-    QTcpServer *m_server = nullptr;
-    QList<QTcpSocket*> m_clients;
-    bool m_status = false;
+    private:
+        QTcpServer *m_server = nullptr;
+        QList<QTcpSocket*> m_clients;
+        bool m_status = false;
 };
 
 #endif /* !SERVER_HPP_ */

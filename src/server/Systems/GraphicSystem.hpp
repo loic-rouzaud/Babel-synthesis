@@ -18,6 +18,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 
+
 class GraphicSystem : public QWidget
 {
     Q_OBJECT
@@ -27,21 +28,19 @@ class GraphicSystem : public QWidget
 
     signals:
         void sendMessages(QString message);
-
-    private slots:
-        void filterList(const QString &text);
+        void sendConnect(QString host, quint16 port);
 
     public slots:
         void onClickSend();
+        void OnClickConnect();
         
-
     private:
-        QStringListModel *m_model;
-        QListView *m_listView;
-        QLineEdit *m_searchEdit;
-        QLineEdit *m_messageEdit;
-        QLineEdit *m_portEdit;
-        QLineEdit *m_ipEdit;
+        QStringListModel *m_model = nullptr;
+        QListView *m_listView = nullptr;
+        QLineEdit *m_searchEdit = nullptr;
+        QLineEdit *m_messageEdit = nullptr;
+        QLineEdit *m_portEdit = nullptr;
+        QLineEdit *m_ipEdit = nullptr;
         QLineEdit *portLineEdit = nullptr;
 };
 

@@ -1,26 +1,10 @@
-{
-    "IP owner": [
-        {
-            "name": "John Smith",
-            "IP": "127.0.0.1",
-            "connected": true
-        },
-        {
-            "name": "Jane Doe",
-            "IP": "127.0.0.1",
-            "connected": false
-        }
-    ],
-    "IP OtherOwner": [
-        {
-            "name": "John Smith",
-            "IP": "127.0.0.1",
-            "connected": true
-        },
-        {
-            "name": "Jane Doe",
-            "IP": "127.0.0.1",
-            "connected": false
-        }
-    ]       
-}
+[
+    {
+        "ipAddress1": "::ffff:10.15.174.152",
+        "isConnected": true
+    },
+    {
+        "ipAddress2": "::ffff:10.15.173.246",
+        "isConnected": true
+    }
+]

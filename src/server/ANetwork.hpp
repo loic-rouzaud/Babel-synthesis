@@ -17,7 +17,6 @@
 #include <QDataStream>
 #include <QTcpSocket>
 
-#include "../client/Client.hpp"
 #include "Server.hpp"
 
 class ANetwork {
