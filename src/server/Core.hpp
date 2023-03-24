@@ -25,7 +25,6 @@ class Core : public QApplication {
 
     protected:
     private:
-        Server *_server;
 };
 
 #endif /* !CORE_HPP_ */

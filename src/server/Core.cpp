@@ -6,9 +6,13 @@
 */
 
 #include "Core.hpp"
+#include "Server.hpp"
+#include <iostream>
 
 Core::Core(int ac, char **av) : QApplication(ac, av)
 {
+    Server *_server;
+    std::cout << "Starting server..." << std::endl;
     _server = new Server();
 }
 

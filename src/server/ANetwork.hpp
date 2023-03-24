@@ -8,23 +8,30 @@
 #ifndef ANETWORK_HPP_
 #define ANETWORK_HPP_
 
-#include <QtWidgets>
 #include <QtCore>
-#include <QDialog>
 #include <QString>
-#include <QList>
 #include <QtNetwork>
-#include <QDataStream>
 #include <QTcpSocket>
-#include "Server.hpp"
+#include "TcpSocket.hpp"
+#include <QObject>
+#include <memory>
 
-class ANetwork {
+class ANetwork : public QObject {
+
+    Q_OBJECT
+
     public:
         ANetwork();
         ~ANetwork();
 
+    public slots:
+        virtual void OnNewClient(QString clientAddress) = 0;
+        virtual void OnDisconnected(QString clientAddress) = 0;
+
     protected:
+        QTcpServer *m_server;
     private:
+        TcpSocket *_tcpSocket = nullptr;
 
 };
 

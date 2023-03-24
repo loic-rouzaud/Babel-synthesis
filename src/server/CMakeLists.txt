@@ -19,6 +19,7 @@ set(SRC_FILES
     Server.cpp
     JsonManager.cpp
     TcpSocket.cpp
+    ANetwork.cpp
 )
 
 qt_wrap_cpp(MOC_FILES
@@ -26,6 +27,7 @@ qt_wrap_cpp(MOC_FILES
     Server.hpp
     JsonManager.hpp
     TcpSocket.hpp
+    ANetwork.hpp
 )
 
 add_executable(${PROJECT_NAME} ${SRC_FILES} ${MOC_FILES})
