@@ -14,7 +14,6 @@ GraphicSystem::GraphicSystem(QWidget *parent) : QWidget(parent)
 
     m_model = new QStringListModel(this);
     QStringList names;
-    names << "Contact1" << "Contact2" << "Contact3";
     m_model->setStringList(names);
 
     m_listView = new QListView(this);
@@ -47,6 +46,7 @@ GraphicSystem::GraphicSystem(QWidget *parent) : QWidget(parent)
 
     QVBoxLayout *mainLayout = new QVBoxLayout();
     mainLayout->addLayout(addressLayout);
+    displayFileData("../server/DataBase.json");
     mainLayout->addLayout(connectButtonLayout);
     mainLayout->addWidget(m_listView);
     mainLayout->addLayout(quitButtonLayout);
@@ -66,4 +66,31 @@ void GraphicSystem::onClickSend()
 void GraphicSystem::OnClickConnect()
 {
     emit sendConnect(m_ipEdit->text(), m_portEdit->text().toInt());
+}
+
+void GraphicSystem::displayFileData(const QString &fileName)
+{
+    QFile file(fileName);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug() << "Error: Could not open file" << fileName;
+        return;
+    }
+
+    QStringList names;
+    QByteArray fileData = file.readAll();
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(fileData);
+    if (!jsonDoc.isArray()) {
+        qDebug() << "Error: Invalid JSON file format" << fileName;
+        return;
+    }
+
+    QJsonArray jsonArray = jsonDoc.array();
+    for (int i = 0; i < jsonArray.size(); ++i) {
+        QJsonObject jsonObj = jsonArray.at(i).toObject();
+        QString name = jsonObj["name"].toString();
+        names.append(name);
+    }
+
+    m_model = new QStringListModel(names, this);
+    m_listView->setModel(m_model);
 }

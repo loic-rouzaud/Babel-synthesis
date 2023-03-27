@@ -17,6 +17,10 @@
 #include <QObject>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include <QFile>
+#include <QJsonArray>
 
 
 class GraphicSystem : public QWidget
@@ -25,6 +29,7 @@ class GraphicSystem : public QWidget
 
     public:
         GraphicSystem(QWidget *parent = nullptr);
+        void displayFileData(const QString &fileName);
 
     signals:
         void sendMessages(QString message);
