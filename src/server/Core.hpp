@@ -25,6 +25,7 @@ class Core : public QApplication {
 
     protected:
     private:
+        GraphicSystem *_graphicSystem;
 };
 
 #endif /* !CORE_HPP_ */

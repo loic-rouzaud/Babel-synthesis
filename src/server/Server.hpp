@@ -31,6 +31,7 @@ class Server: public ANetwork
         void changeStatus(QString clientAddress);
 
     signals:
+        void jsonRefresh(QString clientAddress);
 
     public slots:
         void OnNewClient(QString clientAddress) override;

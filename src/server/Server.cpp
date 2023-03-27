@@ -34,11 +34,13 @@ Server::Server()
 void Server::OnNewClient(QString clientAddress)
 {
     m_jsonManager->createUser(clientAddress);
+    emit jsonRefresh(clientAddress);
 }
 
 void Server::OnDisconnected(QString clientAddress)
 {
     m_jsonManager->changeStatus(clientAddress);
+    emit jsonRefresh(clientAddress);
 }
 
 

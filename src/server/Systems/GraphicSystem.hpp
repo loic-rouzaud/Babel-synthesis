@@ -17,6 +17,12 @@
 #include <QObject>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QFile>
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QStringList>
+#include <iostream>
 
 
 class GraphicSystem : public QWidget
@@ -25,23 +31,14 @@ class GraphicSystem : public QWidget
 
     public:
         GraphicSystem(QWidget *parent = nullptr);
-
-    signals:
-        void sendMessages(QString message);
-        void sendConnect(QString host, quint16 port);
+        ~GraphicSystem();
+        void displayJsonFile(const QString &fileName, QListView *listView);
 
     public slots:
-        void onClickSend();
-        void OnClickConnect();
-        
+        void refresh(QString clientAddress);
+    
+    protected:
     private:
-        QStringListModel *m_model = nullptr;
-        QListView *m_listView = nullptr;
-        QLineEdit *m_searchEdit = nullptr;
-        QLineEdit *m_messageEdit = nullptr;
-        QLineEdit *m_portEdit = nullptr;
-        QLineEdit *m_ipEdit = nullptr;
-        QLineEdit *portLineEdit = nullptr;
 };
 
 #endif /* !GRAPAHICSYSTEM_HPP_ */

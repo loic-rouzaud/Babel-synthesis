@@ -8,6 +8,8 @@
 #ifndef ISYSTEM_HPP_
 #define ISYSTEM_HPP_
 
+#include "GraphicSystem.hpp"
+
 class ISystem {
     public:
         ISystem();

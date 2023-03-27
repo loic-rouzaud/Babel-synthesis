@@ -11,9 +11,11 @@
 
 Core::Core(int ac, char **av) : QApplication(ac, av)
 {
+    _graphicSystem = new GraphicSystem();
     Server *_server;
     std::cout << "Starting server..." << std::endl;
     _server = new Server();
+    connect(_server, SIGNAL(jsonRefresh(QString)), _graphicSystem, SLOT(refresh(QString)));
 }
 
 Core::~Core()

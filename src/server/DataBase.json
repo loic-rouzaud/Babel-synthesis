@@ -1,14 +1,14 @@
 [
     {
-        "ipAddress1": "::ffff:10.15.174.152",
-        "isConnected": false
-    },
-    {
         "ipAddress2": "::ffff:10.15.173.246",
         "isConnected": false
     },
     {
         "ipAddress3": "::ffff:10.15.177.214",
+        "isConnected": false
+    },
+    {
+        "ipAddress3": "::ffff:10.15.174.152",
         "isConnected": false
     }
 ]
