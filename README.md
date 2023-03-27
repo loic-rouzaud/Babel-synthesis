@@ -14,7 +14,7 @@ git clone https://github.com/Microsoft/vcpkg.git
 ./vcpkg/bootstrap-vcpkg.sh
 ```
 
-**Get your VCPKG path to build it later"
+**Get your VCPKG path to build it later**
 
 ```bash
 sudo ./vcpkg/vcpkg integrate install
@@ -49,3 +49,7 @@ cmake --build [build directory]
 ```bash
 ./Client
 ```
+
+# UML 
+
+![Screenshot](UML.png)
