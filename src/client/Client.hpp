@@ -21,26 +21,25 @@ class Client : public QObject
 {
     Q_OBJECT
 
-public:
-    explicit Client(QObject *parent = nullptr);
-    ~Client();
+    public:
+        explicit Client(QObject *parent = nullptr);
+        ~Client();
+        void disconnectFromServer();
 
-    void disconnectFromServer();
+    signals:
+        void messageReceived(QString message);
+        void error(QAbstractSocket::SocketError socketError);
 
-signals:
-    void messageReceived(QString message);
-    void error(QAbstractSocket::SocketError socketError);
+    public slots:
+        void readyRead();
+        void connected();
+        void disconnected();
+        void onSendMessage(QString message);
+        void connectToServer(QString host, quint16 port);
+        void displayError(QAbstractSocket::SocketError socketError);
 
-public slots:
-    void readyRead();
-    void connected();
-    void disconnected();
-    void onSendMessage(QString message);
-    void connectToServer(QString host, quint16 port);
-    void displayError(QAbstractSocket::SocketError socketError);
-
-private:
-    QTcpSocket *m_socket;
+    private:
+        QTcpSocket *m_socket;
 };
 
 

@@ -17,11 +17,11 @@
 #include <QObject>
 #include <QHBoxLayout>
 #include <QLabel>
-#include <QJsonObject>
-#include <QJsonDocument>
 #include <QFile>
+#include <QJsonDocument>
 #include <QJsonArray>
-
+#include <QJsonObject>
+#include <QStringList>
 
 class GraphicSystem : public QWidget
 {
@@ -29,7 +29,7 @@ class GraphicSystem : public QWidget
 
     public:
         GraphicSystem(QWidget *parent = nullptr);
-        void displayFileData(const QString &fileName);
+        void displayJsonFile(const QString &fileName, QListView *listView);
 
     signals:
         void sendMessages(QString message);

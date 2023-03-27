@@ -12,12 +12,8 @@ GraphicSystem::GraphicSystem(QWidget *parent) : QWidget(parent)
     QWidget* widget = dynamic_cast<QWidget*>(this);
     widget->setWindowTitle("SKYPE");
 
-    m_model = new QStringListModel(this);
-    QStringList names;
-    m_model->setStringList(names);
-
-    m_listView = new QListView(this);
-    m_listView->setModel(m_model);
+    QListView *listView = new QListView();
+    displayJsonFile("../server/DataBase.json", listView);
 
     m_portEdit = new QLineEdit(this);
     m_ipEdit = new QLineEdit(this);
@@ -46,10 +42,9 @@ GraphicSystem::GraphicSystem(QWidget *parent) : QWidget(parent)
 
     QVBoxLayout *mainLayout = new QVBoxLayout();
     mainLayout->addLayout(addressLayout);
-    displayFileData("../server/DataBase.json");
     mainLayout->addLayout(connectButtonLayout);
-    mainLayout->addWidget(m_listView);
     mainLayout->addLayout(quitButtonLayout);
+    mainLayout->addWidget(listView);
     mainLayout->addLayout(sendMessageLayout);
     setLayout(mainLayout);
 
@@ -68,29 +63,31 @@ void GraphicSystem::OnClickConnect()
     emit sendConnect(m_ipEdit->text(), m_portEdit->text().toInt());
 }
 
-void GraphicSystem::displayFileData(const QString &fileName)
+void GraphicSystem::displayJsonFile(const QString& fileName, QListView* listView)
 {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         qDebug() << "Error: Could not open file" << fileName;
         return;
     }
+    QByteArray jsonData = file.readAll();
+    file.close();
 
-    QStringList names;
-    QByteArray fileData = file.readAll();
-    QJsonDocument jsonDoc = QJsonDocument::fromJson(fileData);
-    if (!jsonDoc.isArray()) {
-        qDebug() << "Error: Invalid JSON file format" << fileName;
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData);
+    if (jsonDoc.isNull()) {
+        qDebug() << "Error: Failed to parse JSON data from file" << fileName;
         return;
     }
 
+    QStringList stringList;
     QJsonArray jsonArray = jsonDoc.array();
     for (int i = 0; i < jsonArray.size(); ++i) {
         QJsonObject jsonObj = jsonArray.at(i).toObject();
-        QString name = jsonObj["name"].toString();
-        names.append(name);
+        QString name = jsonObj.keys().at(0);
+        bool isConnected = jsonObj["isConnected"].toBool();
+        QString connectionStatus = isConnected ? "Connected" : "Not Connected";
+        stringList.append(name + ": " + connectionStatus);
     }
-
-    m_model = new QStringListModel(names, this);
-    m_listView->setModel(m_model);
+    QStringListModel* model = new QStringListModel(stringList, listView);
+    listView->setModel(model);
 }
