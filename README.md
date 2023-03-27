@@ -14,11 +14,17 @@ git clone https://github.com/Microsoft/vcpkg.git
 ./vcpkg/bootstrap-vcpkg.sh
 ```
 
+**Get your VCPKG path to build it later"
+
+```bash
+sudo ./vcpkg/vcpkg integrate install
+```
+
 ```bash
 cd server
 ```
 
-***OR***
+***AND***
 
 ```bash
 cd client
