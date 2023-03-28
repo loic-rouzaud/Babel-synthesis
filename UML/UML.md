@@ -1,3 +1,0 @@
-# UML 
-
-![Screenshot](UML.png)

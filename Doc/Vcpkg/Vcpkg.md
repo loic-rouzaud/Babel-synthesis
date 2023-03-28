@@ -60,3 +60,11 @@ vcpkg install [packages to install]
 vcpkg install opus
 vcpkg install portaudio
 ````
+
+## Install Qt6 via VCPKG
+
+```bash
+./vcpkg install qtbase --keep-going
+````
+
+If depencies are missing, install them.
