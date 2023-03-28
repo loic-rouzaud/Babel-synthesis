@@ -12,7 +12,6 @@
 
 #include <QApplication>
 
-// #include "INetwork.hpp"
 #include "Client.hpp"
 #include "GraphicSystem.hpp"
 

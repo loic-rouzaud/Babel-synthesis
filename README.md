@@ -1,22 +1,24 @@
 
 # Babel
 
+***CMAKE version 3.10***
+
 **Goal of the project**
 
-**CMAKE version 3.10**
+The project is to create an OS-independent Voice Over IP (VOIP) protocol similar to SIP, which can be used over the internet. The protocol must be a client/server binary protocol with voice transport being client-to-client. The project must use specified libraries, including PortAudio for sound, Opus for compression codec, and Qt for the client's graphical user interface. Conan must be used for dependency management and CMake for building. The project must include a documentation of the binary protocol, a UML compliant class diagram, network abstraction using Asio or custom-made server-side and Qt Network or custom-made client-side, a Qt GUI client-side, a C++ abstraction of PortAudio and Opus, a contact list, the ability to make a call, and the ability to hang up. The project must be object-oriented, and any not explicitly authorized library is explicitly forbidden. Code must be readable, maintainable, and performant.
 
-# UML
+## UML
 
 [Babel UML](./UML/UML.md)
 
-# Use VCPKG ?
+## Use VCPKG ?
 
 [VCPKG Doc](./Vcpkg/Vcpkg.md)
 
-# Use Opus and PortAudio
+## Use Opus and PortAudio
 
 [Opus and PortAudio](audioPoc/README.md)
 
-# Documentation of the code
+## Documentation of the code
 
 [Code doc](Doc/CodeDoc.md)

@@ -32,7 +32,7 @@ class GraphicSystem : public QWidget
 
     signals:
         void sendMessages(QString message);
-        void sendConnect(QString host, quint16 port);
+        // void sendConnect(QString host, quint16 port);
 
     public slots:
         void onClickSend();
@@ -40,7 +40,6 @@ class GraphicSystem : public QWidget
         // void ipSearch(const QString& ip);
         
     private:
-        QStringListModel *m_model = nullptr;
         QLineEdit *m_searchEdit = nullptr;
         QLineEdit *m_messageEdit = nullptr;
         QLineEdit *m_portEdit = nullptr;

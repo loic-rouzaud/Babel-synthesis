@@ -1,6 +1,7 @@
 # VCPKG USAGE
 
 **Clone the Vcpkg repository**
+
 ```bash
 git clone https://github.com/Microsoft/vcpkg.git
 ```
@@ -46,3 +47,16 @@ cmake --build [build directory]
 ```bash
 ./Client
 ```
+
+## Compilation librairies with VCPKG
+
+```bash
+vcpkg install [packages to install]
+```
+
+**Opus and PortAudio**
+
+```bash
+vcpkg install opus
+vcpkg install portaudio
+````
