@@ -32,7 +32,7 @@ class GraphicSystem : public QWidget
 
     signals:
         void sendMessages(QString message);
-        // void sendConnect(QString host, quint16 port);
+        void sendConnect(QString host, quint16 port);
 
     public slots:
         void onClickSend();
