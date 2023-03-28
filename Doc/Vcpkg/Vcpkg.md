@@ -1,5 +1,7 @@
 # VCPKG USAGE
 
+# ON LINUX IN THE BABEL DIRECTORY
+
 **Clone the Vcpkg repository**
 
 ```bash
@@ -12,61 +14,60 @@ git clone https://github.com/Microsoft/vcpkg.git
 ./vcpkg/bootstrap-vcpkg.sh
 ```
 
-**Get your VCPKG path to build it later**
+```bash
+cd vcpkg
+```
+
+**DEPENDENCIES TO INSTALL**
+
+```bash
+sudo dnf install bison
+```
+
+```bash
+sudo dnf install autoconf-archive
+```
+
+**QT INSTALLATION**
+
+```bash
+/vcpkg install qtbase
+```
+
+**RUN THE PROJECT**
+
+```bash
+cd ..
+```
 
 ```bash
 sudo ./vcpkg/vcpkg integrate install
 ```
 
-```bash
-cd server
-```
-
-***AND***
+**COPY THE -DCMAKE**
 
 ```bash
-cd client
-```
-
-**Build your project**
-
-```bash
-cmake -B [build directory] -S . -DCMAKE_TOOLCHAIN_FILE=[path to vcpkg]/scripts/buildsystems/vcpkg.cmake
+cd src/server
 ```
 
 ```bash
-cmake --build [build directory]
-```
-
-**Run the project**
-
-```bash
-cd [build directory] &&
-./Server
+cmake -B Build -S . **PAST THE -DCMAKE YOU COPY BEFORE**
 ```
 
 ```bash
-cd [build directory] &&
-./Client
+cmake --build Build && ./Server
 ```
 
-## Compilation librairies with VCPKG
+***AND IN ANOTHER TERMINAL***
 
 ```bash
-vcpkg install [packages to install]
+cd src/client
 ```
 
-**Opus and PortAudio**
+```bash
+cmake -B Build -S . **PAST THE -DCMAKE YOU COPY BEFORE**
+```
 
 ```bash
-vcpkg install opus
-vcpkg install portaudio
-````
-
-## Install Qt6 via VCPKG
-
-```bash
-./vcpkg install qtbase --keep-going
-````
-
-If depencies are missing, install them.
+cmake --build Build && ./Client
+```
