@@ -2,6 +2,8 @@
 
 # ON LINUX IN THE BABEL DIRECTORY
 
+# OBLIGATORY Dependencies : Qt6
+
 **Clone the Vcpkg repository**
 
 ```bash
@@ -12,32 +14,6 @@ git clone https://github.com/Microsoft/vcpkg.git
 
 ```bash
 ./vcpkg/bootstrap-vcpkg.sh
-```
-
-```bash
-cd vcpkg
-```
-
-**DEPENDENCIES TO INSTALL**
-
-```bash
-sudo dnf install bison
-```
-
-```bash
-sudo dnf install autoconf-archive
-```
-
-**QT INSTALLATION**
-
-```bash
-/vcpkg install qtbase
-```
-
-**RUN THE PROJECT**
-
-```bash
-cd ..
 ```
 
 ```bash
