@@ -31,7 +31,11 @@ cmake -B Build -S . **PAST THE -DCMAKE YOU COPY BEFORE**
 ```
 
 ```bash
-cmake --build Build && ./Server
+cmake --build Build
+```
+
+```bash
+./Build/Server
 ```
 
 ***AND IN ANOTHER TERMINAL***
@@ -46,4 +50,8 @@ cmake -B Build -S . **PAST THE -DCMAKE YOU COPY BEFORE**
 
 ```bash
 cmake --build Build && ./Client
+```
+
+```bash
+./Build/Client
 ```
