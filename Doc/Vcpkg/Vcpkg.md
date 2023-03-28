@@ -49,7 +49,7 @@ cmake -B Build -S . **PAST THE -DCMAKE YOU COPY BEFORE**
 ```
 
 ```bash
-cmake --build Build && ./Client
+cmake --build Build
 ```
 
 ```bash
