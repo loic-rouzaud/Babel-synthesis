@@ -1,6 +1,6 @@
 # Code and explications
 
-***Client side***
+# Client side
 
 ## Core.hpp
 
@@ -59,7 +59,7 @@ Slots:
 Private:
 **QTcpSocket *m_socket** : Use to create the ClientSocket.
 
-***Server side***
+# Server side
 
 ## Core
 
