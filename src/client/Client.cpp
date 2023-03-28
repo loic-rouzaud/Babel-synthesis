@@ -10,10 +10,6 @@
 Client::Client(QObject *parent) : QObject(parent)
 {
     m_socket = new QTcpSocket(this);
-
-    connect(m_socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
-    connect(m_socket, SIGNAL(connected()), this, SLOT(connected()));
-    connect(m_socket, SIGNAL(disconnected()), this, SLOT(disconnected()));
 }
 
 Client::~Client()
@@ -42,23 +38,6 @@ void Client::onSendMessage(QString message)
 void Client::disconnectFromServer()
 {
     m_socket->disconnectFromHost();
-}
-
-void Client::readyRead()
-{
-    QByteArray data = m_socket->readAll();
-    QString message(data);
-    emit messageReceived(message);
-}
-
-void Client::connected()
-{
-    qDebug() << "Connected to server.";
-}
-
-void Client::disconnected()
-{
-    qDebug() << "Disconnected from server.";
 }
 
 void Client::displayError(QAbstractSocket::SocketError socketError)

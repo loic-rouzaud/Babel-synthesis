@@ -1,6 +1,8 @@
 
 # Babel
 
+**CMAKE version 3.10**
+
 ## How to use it ?
 
 **Clone the Vcpkg repository**

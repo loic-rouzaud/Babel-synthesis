@@ -12,8 +12,8 @@ GraphicSystem::GraphicSystem(QWidget *parent) : QWidget(parent)
     QWidget* widget = dynamic_cast<QWidget*>(this);
     widget->setWindowTitle("SKYPE");
 
-    QListView *listView = new QListView();
-    displayJsonFile("../server/DataBase.json", listView);
+    // QListView *listView = new QListView();
+    // displayJsonFile("../server/DataBase.json", listView);
 
     m_portEdit = new QLineEdit(this);
     m_ipEdit = new QLineEdit(this);
@@ -43,9 +43,9 @@ GraphicSystem::GraphicSystem(QWidget *parent) : QWidget(parent)
     QVBoxLayout *mainLayout = new QVBoxLayout();
     mainLayout->addLayout(addressLayout);
     mainLayout->addLayout(connectButtonLayout);
-    mainLayout->addLayout(quitButtonLayout);
-    mainLayout->addWidget(listView);
     mainLayout->addLayout(sendMessageLayout);
+    mainLayout->addLayout(quitButtonLayout);
+    // mainLayout->addWidget(listView);
     setLayout(mainLayout);
 
     connect(quitButton, SIGNAL(clicked()), this, SLOT(close()));

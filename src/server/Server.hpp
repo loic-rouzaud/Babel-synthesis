@@ -27,8 +27,6 @@ class Server: public ANetwork
 
     public:
         explicit Server();
-        void createUser(QString clientAddress);
-        void changeStatus(QString clientAddress);
 
     signals:
         void jsonRefresh(QString clientAddress);
