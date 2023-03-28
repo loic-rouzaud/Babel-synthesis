@@ -1,57 +1,22 @@
 
 # Babel
 
+**Goal of the project**
+
 **CMAKE version 3.10**
 
-## How to use it ?
+# UML
 
-**Clone the Vcpkg repository**
-```bash
-git clone https://github.com/Microsoft/vcpkg.git
-```
+[Babel UML](./UML/UML.md)
 
-**Run the bootstrap script to build vcpkg**
+# Use VCPKG ?
 
-```bash
-./vcpkg/bootstrap-vcpkg.sh
-```
+[VCPKG Doc](./Vcpkg/Vcpkg.md)
 
-**Get your VCPKG path to build it later**
+# Use Opus and PortAudio
 
-```bash
-sudo ./vcpkg/vcpkg integrate install
-```
+[Opus and PortAudio](audioPoc/README.md)
 
-```bash
-cd server
-```
+# Documentation of the code
 
-***AND***
-
-```bash
-cd client
-```
-
-**Build your project**
-
-```bash
-cmake -B [build directory] -S . -DCMAKE_TOOLCHAIN_FILE=[path to vcpkg]/scripts/buildsystems/vcpkg.cmake
-```
-
-```bash
-cmake --build [build directory]
-```
-
-**Run the project**
-
-```bash
-./Server
-```
-
-```bash
-./Client
-```
-
-# UML 
-
-![Screenshot](UML.png)
+[Code doc](Doc/CodeDoc.md)
