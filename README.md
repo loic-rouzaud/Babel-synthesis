@@ -9,11 +9,11 @@ The project is to create an OS-independent Voice Over IP (VOIP) protocol similar
 
 ## UML
 
-[Babel UML](./UML/UML.md)
+[Babel UML](./Doc/UML/UML.md)
 
 ## Use VCPKG ?
 
-[VCPKG Doc](./Vcpkg/Vcpkg.md)
+[VCPKG Doc](./Doc/Vcpkg/Vcpkg.md)
 
 ## Use Opus and PortAudio
 
