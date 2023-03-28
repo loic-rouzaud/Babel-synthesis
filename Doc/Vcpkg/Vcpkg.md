@@ -41,10 +41,12 @@ cmake --build [build directory]
 **Run the project**
 
 ```bash
+cd [build directory] &&
 ./Server
 ```
 
 ```bash
+cd [build directory] &&
 ./Client
 ```
 
